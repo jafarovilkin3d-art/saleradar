@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SaleRadar - Canlı Endirim Xəritəsi</title>
 
+  <!-- Premium və Modern Şrift -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+
   <style>
     * {
       margin: 0;
@@ -13,7 +16,7 @@
     }
 
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Plus Jakarta Sans', Arial, sans-serif;
       background: #070707;
       color: #ffffff;
       min-height: 100vh;
@@ -35,7 +38,7 @@
       padding: 28px 18px;
     }
 
-    /* Logo sahəsi üçün */
+    /* Logo sahəsi */
     .logo-area {
       margin-bottom: 24px;
     }
@@ -147,7 +150,7 @@
       font-size: 13px;
     }
 
-    /* Şəkillər əsaslı yeni Mockup stili */
+    /* Şəkillər əsaslı Telefon Maketi */
     .phone-mockup-wrapper {
       position: relative;
       width: 100%;
@@ -214,6 +217,26 @@
     .feature p {
       color: #c7c7c7;
       line-height: 1.5;
+    }
+
+    /* Canlı Radar Xəritə Bölməsi */
+    .map-screen-wrapper {
+      max-width: 420px;
+      margin: auto;
+      padding: 0 10px;
+    }
+
+    .map-screen-img {
+      width: 100%;
+      display: block;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+      transition: transform 0.3s ease;
+    }
+
+    .map-screen-img:hover {
+      transform: translateY(-5px);
     }
 
     .qr-box {
@@ -291,6 +314,7 @@
         <img src="assets/logo.png" alt="SaleRadar Logo" class="logo-img">
       </div>
 
+      <!-- Hero Bölməsi -->
       <section class="hero">
         <div>
           <div class="badge">📍 Canlı endirim xəritəsi</div>
@@ -330,7 +354,7 @@
           </div>
         </div>
 
-        <!-- Yeni Şəkil Əsaslı Telefon Maketi -->
+        <!-- Şəkil Əsaslı Telefon Maketi -->
         <div class="phone-mockup-wrapper">
           <img src="assets/hero-screen.jpg" alt="SaleRadar Tətbiq Ekranı" class="phone-mockup">
         </div>
@@ -369,20 +393,18 @@
           </div>
         </div>
       </section>
-      <section class="section">
-  <h2 class="section-title">Canlı Radar xəritədə</h2>
-  <p class="section-desc">
-    Yaxınlıqdakı endirimləri xəritədə gör, mağazaya daha tez çat.
-  </p>
 
-  <div style="max-width:420px;margin:auto;">
-    <img
-      src="assets/map-screen.jpg"
-      alt="SaleRadar Xəritə Ekranı"
-      style="width:100%;border-radius:30px;box-shadow:0 30px 80px rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.16);"
-    >
-  </div>
-</section>
+      <!-- Canlı Radar Xəritə Bölməsi -->
+      <section class="section">
+        <h2 class="section-title">Canlı Radar xəritədə</h2>
+        <p class="section-desc">
+          Yaxınlıqdakı endirimləri xəritədə gör, mağazaya daha tez çat.
+        </p>
+
+        <div class="map-screen-wrapper">
+          <img src="assets/map-screen.jpg" alt="SaleRadar Xəritə Ekranı" class="map-screen-img">
+        </div>
+      </section>
 
       <!-- Smart QR Bölməsi -->
       <section class="section">
