@@ -1,14 +1,483 @@
 <!DOCTYPE html>
 <html lang="az">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SaleRadar</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SaleRadar - Canlı Endirim Xəritəsi</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #070707;
+      color: #ffffff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .page {
+      width: 100%;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(229, 0, 18, 0.35), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.08), transparent 35%),
+        #070707;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 28px 18px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 36px;
+      align-items: center;
+      min-height: 90vh;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      padding: 9px 14px;
+      border-radius: 999px;
+      color: #ffdddd;
+      margin-bottom: 18px;
+      font-size: 14px;
+    }
+
+    h1 {
+      font-size: clamp(44px, 8vw, 86px);
+      line-height: 0.95;
+      letter-spacing: -2px;
+      margin-bottom: 18px;
+    }
+
+    .red {
+      color: #e60012;
+    }
+
+    .subtitle {
+      font-size: clamp(20px, 3vw, 32px);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .text {
+      color: #d6d6d6;
+      font-size: 18px;
+      line-height: 1.6;
+      max-width: 560px;
+      margin-bottom: 26px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .btn {
+      text-decoration: none;
+      color: white;
+      padding: 14px 20px;
+      border-radius: 16px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.09);
+      transition: 0.25s;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      background: rgba(255,255,255,0.16);
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, #e60012, #ff4b55);
+      box-shadow: 0 12px 35px rgba(230, 0, 18, 0.35);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .stat {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      color: #fff;
+      font-size: 24px;
+      margin-bottom: 6px;
+    }
+
+    .stat span {
+      color: #bbb;
+      font-size: 13px;
+    }
+
+    .phone-card {
+      position: relative;
+      background: linear-gradient(160deg, rgba(255,255,255,0.16), rgba(255,255,255,0.04));
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 36px;
+      padding: 22px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.55);
+    }
+
+    .phone {
+      background: #f4f4f8;
+      color: #111;
+      border-radius: 32px;
+      padding: 18px;
+      min-height: 560px;
+      box-shadow: inset 0 0 0 7px #111;
+      overflow: hidden;
+    }
+
+    .screen-top {
+      background: linear-gradient(135deg, #111, #e60012);
+      color: white;
+      padding: 22px;
+      border-radius: 24px;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .screen-top h2 {
+      font-size: 26px;
+      margin-bottom: 8px;
+    }
+
+    .deal-card {
+      background: white;
+      border-radius: 24px;
+      padding: 18px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.14);
+      margin-bottom: 15px;
+    }
+
+    .deal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .discount {
+      background: linear-gradient(135deg, #e60012, #ff565f);
+      color: white;
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-weight: 900;
+    }
+
+    .watch {
+      height: 150px;
+      border-radius: 18px;
+      background:
+        radial-gradient(circle, #333, #050505 65%);
+      margin-bottom: 16px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 46px;
+    }
+
+    .price {
+      font-size: 30px;
+      font-weight: 900;
+      color: #e60012;
+      margin-top: 10px;
+    }
+
+    .map-mini {
+      height: 130px;
+      border-radius: 22px;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,0.08) 1px, transparent 1px),
+        linear-gradient(rgba(0,0,0,0.08) 1px, transparent 1px),
+        #eee8dc;
+      background-size: 34px 34px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pin {
+      position: absolute;
+      width: 48px;
+      height: 48px;
+      background: #e60012;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 22px;
+      box-shadow: 0 10px 30px rgba(230,0,18,.35);
+    }
+
+    .pin.one { top: 30px; left: 40px; }
+    .pin.two { bottom: 26px; right: 58px; background: #ffb000; }
+
+    .section {
+      padding: 60px 0;
+    }
+
+    .section-title {
+      font-size: clamp(30px, 5vw, 48px);
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      color: #cfcfcf;
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 34px;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .feature {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.13);
+      border-radius: 24px;
+      padding: 22px;
+      min-height: 170px;
+    }
+
+    .feature .icon {
+      font-size: 34px;
+      margin-bottom: 14px;
+    }
+
+    .feature h3 {
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
+    .feature p {
+      color: #c7c7c7;
+      line-height: 1.5;
+    }
+
+    .qr-box {
+      max-width: 760px;
+      margin: auto;
+      background: linear-gradient(135deg, rgba(230,0,18,.22), rgba(255,255,255,.08));
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 30px;
+      padding: 28px;
+      text-align: center;
+    }
+
+    .qr {
+      width: 170px;
+      height: 170px;
+      background: white;
+      border-radius: 20px;
+      margin: 20px auto;
+      display: grid;
+      place-items: center;
+      color: #111;
+      font-weight: 900;
+    }
+
+    footer {
+      color: #aaa;
+      text-align: center;
+      padding: 30px 0 45px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 850px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 25px;
+      }
+
+      .stats,
+      .features {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .phone {
+        min-height: 520px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .stats,
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .buttons {
+        flex-direction: column;
+      }
+
+      .btn {
+        justify-content: center;
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <div class="page">
+    <main class="container">
 
-<h1>SaleRadar</h1>
+      <section class="hero">
+        <div>
+          <div class="badge">📍 Canlı endirim xəritəsi</div>
 
+          <h1><span class="red">SALE</span>RADAR</h1>
+
+          <div class="subtitle">Endirimləri birlikdə paylaşaq!</div>
+
+          <p class="text">
+            SaleRadar mağazalarda, marketlərdə və şəhərin müxtəlif nöqtələrində olan endirimləri
+            xəritədə göstərən canlı paylaşım platformasıdır.
+          </p>
+
+          <div class="buttons">
+            <a class="btn primary" href="#" target="_blank">▶ Google Play</a>
+            <a class="btn" href="#" target="_blank"> App Store</a>
+            <a class="btn" href="#" target="_blank">🧪 TestFlight</a>
+            <a class="btn" href="https://wa.me/994502826790" target="_blank">💬 WhatsApp</a>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <strong>📍</strong>
+              <span>Xəritədə endirimlər</span>
+            </div>
+            <div class="stat">
+              <strong>📡</strong>
+              <span>Canlı radar</span>
+            </div>
+            <div class="stat">
+              <strong>🔔</strong>
+              <span>Real vaxt bildirişlər</span>
+            </div>
+            <div class="stat">
+              <strong>👑</strong>
+              <span>VIP elanlar</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="phone-card">
+          <div class="phone">
+            <div class="screen-top">
+              <h2>SaleRadar</h2>
+              <p>📍 500 m yaxınlıqda endirimlər</p>
+            </div>
+
+            <div class="deal-card">
+              <div class="deal-head">
+                <strong>TISSOT</strong>
+                <span class="discount">-82%</span>
+              </div>
+
+              <div class="watch">⌚</div>
+
+              <h3>Saat</h3>
+              <p>04 Jul → 08 Jul</p>
+              <div class="price">₼59.00</div>
+            </div>
+
+            <div class="map-mini">
+              <div class="pin one">%</div>
+              <div class="pin two">🔥</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Niyə SaleRadar?</h2>
+        <p class="section-desc">
+          Endirimləri tapmaq, paylaşmaq və real vaxtda izləmək üçün daha ağıllı və sosial yol.
+        </p>
+
+        <div class="features">
+          <div class="feature">
+            <div class="icon">🗺️</div>
+            <h3>Xəritədə endirimlər</h3>
+            <p>Yaxınlıqdakı endirimləri xəritədə gör və mağazaya daha tez çat.</p>
+          </div>
+
+          <div class="feature">
+            <div class="icon">📡</div>
+            <h3>Canlı Radar</h3>
+            <p>İstifadəçilər real vaxtda gördükləri endirimləri paylaşa bilirlər.</p>
+          </div>
+
+          <div class="feature">
+            <div class="icon">✅</div>
+            <h3>İcma yoxlaması</h3>
+            <p>Endirim var, az qalıb və ya bitib kimi səsvermə ilə məlumat yenilənir.</p>
+          </div>
+
+          <div class="feature">
+            <div class="icon">👑</div>
+            <h3>VIP üstünlük</h3>
+            <p>VIP elanlar daha uzun müddət aktiv qalır və daha çox görünür.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="qr-box">
+          <h2 class="section-title">Smart QR üçün hazır səhifə</h2>
+          <p class="section-desc">
+            Bu səhifə vizit kart, reklam və mağaza təqdimatlarında istifadə ediləcək.
+            Linklər dəyişsə belə QR kod eyni qala bilər.
+          </p>
+
+          <div class="qr">QR</div>
+
+          <div class="buttons" style="justify-content:center;">
+            <a class="btn primary" href="#" target="_blank">Tətbiqi yüklə</a>
+            <a class="btn" href="mailto:saleradar@gmail.com">📧 Email</a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      © 2026 SaleRadar. Endirimləri birlikdə paylaşaq.
+    </footer>
+  </div>
 </body>
 </html>
