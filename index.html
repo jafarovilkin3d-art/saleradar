@@ -38,13 +38,19 @@
       padding: 28px 18px;
     }
 
-    /* Logo sahəsi */
+    /* 1. Logo Sahəsi (Yeniləndi) */
     .logo-area {
-      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 30px;
+      opacity: 0; /* Animasiya üçün başlanğıc */
+      animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
     
     .logo-img {
-      height: 50px;
+      width: 95px;
+      height: 95px;
       object-fit: contain;
     }
 
@@ -53,7 +59,14 @@
       grid-template-columns: 1.1fr 0.9fr;
       gap: 36px;
       align-items: center;
-      min-height: 85vh;
+      min-height: 80vh;
+    }
+
+    /* Sol mətn blokunun animasiyası */
+    .hero-content {
+      opacity: 0;
+      animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation-delay: 0.15s; /* Loqodan bir az sonra açılır */
     }
 
     .badge {
@@ -150,12 +163,15 @@
       font-size: 13px;
     }
 
-    /* Şəkillər əsaslı Telefon Maketi */
+    /* 2. Telefon Şəkli Üçün Wrapper (Yeniləndi - Böyüdüldü) */
     .phone-mockup-wrapper {
       position: relative;
       width: 100%;
-      max-width: 360px;
+      max-width: 430px;
       margin: 0 auto;
+      opacity: 0;
+      animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation-delay: 0.3s; /* Ən son və dinamik açılan element */
     }
 
     .phone-mockup {
@@ -268,11 +284,25 @@
       object-fit: contain;
     }
 
+    /* 7. Footer (Yeniləndi) */
     footer {
       color: #aaa;
       text-align: center;
       padding: 30px 0 45px;
       font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* Premium Slide + Fade Animasiyası (Apple & Linear üslubu) */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     @media (max-width: 850px) {
@@ -309,25 +339,36 @@
   <div class="page">
     <main class="container">
       
-      <!-- Logo Hissəsi -->
+      <!-- 1. Yeni Premium Logo Hissəsi -->
       <div class="logo-area">
         <img src="assets/logo.png" alt="SaleRadar Logo" class="logo-img">
+        <div>
+          <h2 style="font-size:36px; font-weight:800; letter-spacing: -1px;">
+            <span style="color:#e60012;">SALE</span>RADAR
+          </h2>
+          <p style="color:#bbb; font-size:17px; font-weight: 500;">
+            Canlı Endirim Xəritəsi
+          </p>
+        </div>
       </div>
 
       <!-- Hero Bölməsi -->
       <section class="hero">
-        <div>
+        <!-- Sol mətn bloku (Animasiya sinfi əlavə edildi) -->
+        <div class="hero-content">
           <div class="badge">📍 Canlı endirim xəritəsi</div>
 
           <h1><span class="red">SALE</span>RADAR</h1>
 
-          <div class="subtitle">Endirimləri birlikdə paylaşaq!</div>
+          <!-- 3. Yeni Subtitle -->
+          <div class="subtitle">Endirimləri birlikdə paylaşaq.</div>
 
+          <!-- 3. Yeni Mətn -->
           <p class="text">
-            SaleRadar mağazalarda, marketlərdə və şəhərin müxtəlif nöqtələrində olan endirimləri
-            xəritədə göstərən canlı paylaşım platformasıdır.
+            Real vaxtda yaxınlıqdakı endirimləri xəritədə tap, paylaş və digər istifadəçilərlə birlikdə ən yaxşı fürsətləri qaçırma.
           </p>
 
+          <!-- 4. Yenilənmiş Düymələr -->
           <div class="buttons">
             <a class="btn primary" href="#" target="_blank">▶ Google Play</a>
             <a class="btn" href="#" target="_blank"> App Store</a>
@@ -354,7 +395,7 @@
           </div>
         </div>
 
-        <!-- Şəkil Əsaslı Telefon Maketi -->
+        <!-- 2. Böyüdülmüş Telefon Maketi (Animasiyalı) -->
         <div class="phone-mockup-wrapper">
           <img src="assets/hero-screen.jpg" alt="SaleRadar Tətbiq Ekranı" class="phone-mockup">
         </div>
@@ -394,11 +435,11 @@
         </div>
       </section>
 
-      <!-- Canlı Radar Xəritə Bölməsi -->
+      <!-- 5. Yenilənmiş Canlı Radar Xəritə Bölməsi -->
       <section class="section">
         <h2 class="section-title">Canlı Radar xəritədə</h2>
         <p class="section-desc">
-          Yaxınlıqdakı endirimləri xəritədə gör, mağazaya daha tez çat.
+          Endirimin harada olduğunu xəritədə bir toxunuşla gör.
         </p>
 
         <div class="map-screen-wrapper">
@@ -406,16 +447,14 @@
         </div>
       </section>
 
-      <!-- Smart QR Bölməsi -->
+      <!-- 6. Yenilənmiş Smart QR Bölməsi -->
       <section class="section">
         <div class="qr-box">
-          <h2 class="section-title">Smart QR üçün hazır səhifə</h2>
+          <h2 class="section-title">SaleRadar tətbiqini indi yoxla</h2>
           <p class="section-desc">
-            Bu səhifə vizit kart, reklam və mağaza təqdimatlarında istifadə ediləcək.
-            Linklər dəyişsə belə QR kod eyni qala bilər.
+            QR kodu oxut və tətbiqə saniyələr ərzində keç.
           </p>
 
-          <!-- Yerli Aktivdən gələn Real QR kod -->
           <div class="qr-wrapper">
             <img src="assets/qr.png" alt="SaleRadar QR" class="qr-img">
           </div>
@@ -429,8 +468,10 @@
 
     </main>
 
+    <!-- 7. Yenilənmiş Footer -->
     <footer>
-      © 2026 SaleRadar. Endirimləri birlikdə paylaşaq.
+      © 2026 SaleRadar<br>
+      Made with ❤️ in Azerbaijan
     </footer>
   </div>
 </body>
