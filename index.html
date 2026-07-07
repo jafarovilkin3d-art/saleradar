@@ -342,6 +342,14 @@
       }
     }
 
+    .store-icon{
+    width:22px;
+    height:22px;
+    object-fit:contain;
+    flex-shrink:0;
+    display:block;
+}
+
     /* Responsive Stillər (Mobil Cihazlar - Yeniləndi) */
     @media (max-width: 520px) {
       /* Mobil üçün Loqo və Başlıq ölçülərinin optimizasiyası */
@@ -406,8 +414,16 @@
           </p>
 
           <div class="buttons">
-            <a class="btn primary" href="#" target="_blank">▶ Google Play</a>
-            <a class="btn" href="#" target="_blank"> App Store</a>
+            <a class="btn primary" href="#" target="_blank">
+    <img src="assets/google-play.svg" class="store-icon" alt="Google Play">
+    Google Play
+</a>
+      
+
+<a class="btn" href="#" target="_blank">
+    <img src="assets/apple.svg" class="store-icon" alt="App Store">
+    App Store
+</a>
             <a class="btn" href="https://wa.me/994502826790" target="_blank">💬 WhatsApp</a>
           </div>
 
